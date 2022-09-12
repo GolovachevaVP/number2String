@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 
 public class number2String {
-    public static void main(String[] args) {
-        String s = "[Java (25)";
+    public static void getProverka(String s) {
         int min = s.length();
         ArrayList<String> list1 = new ArrayList<>();
         list1.add(")");
@@ -14,13 +13,16 @@ public class number2String {
         list2.add("[");
         list2.add("{");
 
-        int j=0;
+        int j = 0;
 
-        for(String element :list1) {
-            for (int i=j; i < list2.size(); i++) {
+        for (String element : list1) {
+            for (int i = j; i < list2.size(); i++) {
                 if ((s.indexOf(element) != -1) & min > s.indexOf(element)) {
 
-                    if (s.indexOf(list2.get(i)) == -1) {
+                    if (s.indexOf(list2.get(i)) == -1 |
+                            (s.indexOf("(") != -1 && s.indexOf(")")==-1)|
+                          (s.indexOf("[") != -1 && s.indexOf("]")==-1) |
+                            (s.indexOf("{") != -1 && s.indexOf("}")==-1)){
                         min = s.indexOf(element);
                         break;
                     }
@@ -30,18 +32,24 @@ public class number2String {
             j++;
         }
 
-        if(min!=s.length())
-            System.out.println("Нет открывающей скобки для скобки с индексом "+ (1+min));
+        if (min != s.length()) {
+            System.out.println((1 + min));
+            return;
+        }
+
 
 
         min = s.length();
-        j=0;
+        j = 0;
 
-        for(String element :list2) {
-            for (int i=j; i < list1.size(); i++) {
+        for (String element : list2) {
+            for (int i = j; i < list1.size(); i++) {
                 if ((s.indexOf(element) != -1) & min > s.indexOf(element)) {
 
-                    if (s.indexOf(list1.get(i)) == -1) {
+                    if ((s.indexOf(list1.get(i)) == -1)|
+                    (s.indexOf(")") != -1 && s.indexOf("(")==-1)|
+                            (s.indexOf("]") != -1 && s.indexOf("[")==-1) |
+                            (s.indexOf("}") != -1 && s.indexOf("{")==-1)) {
                         min = s.indexOf(element);
                         break;
                     }
@@ -50,9 +58,28 @@ public class number2String {
             }
             j++;
         }
-        if(min!=s.length())
-            System.out.println("Нет закрывающей скобки для скобки с индексом "+ (1+min));
+        if (min != s.length())
+            System.out.println((1 + min));
         else System.out.println("Success");
+
+        //return "END";
+
+    }
+
+
+
+    public static void main(String[] args) {
+        getProverka("[]");
+        getProverka("{}[]");
+        getProverka("{[]}()");
+        getProverka("{");
+        getProverka("{[}");
+        getProverka("foo(bar)");
+        getProverka("foo(bar[i)");
+
+    }
+}
+
 
 
 
@@ -101,5 +128,5 @@ public class number2String {
 //            System.out.println("Нет открывающей/закрывающей скобки для скобки с индексом "+ (1+min));
 //        else System.out.println("Success");
 //
-    }
-}
+
+
