@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class number2String {
-    public static void getProverka(String s) {
+    public static String getProverka(String s) {
+        System.out.print("Строка "+s+" - ");
         int min = s.length();
         ArrayList<String> list1 = new ArrayList<>();
         list1.add(")");
@@ -16,25 +17,24 @@ public class number2String {
         int j = 0;
 
         for (String element : list1) {
-            for (int i = j; i < list2.size(); i++) {
-                if ((s.indexOf(element) != -1) & min > s.indexOf(element)) {
+           // for (int i = j; i < list2.size();) {
+                if ((s.contains(element)) & min > s.indexOf(element)) {
 
-                    if (s.indexOf(list2.get(i)) == -1 |
-                            (s.indexOf("(") != -1 && s.indexOf(")")==-1)|
-                          (s.indexOf("[") != -1 && s.indexOf("]")==-1) |
-                            (s.indexOf("{") != -1 && s.indexOf("}")==-1)){
+                    if (!s.contains(list2.get(j)) |
+                            (s.contains("(") && !s.contains(")"))|
+                          (s.contains("[") && !s.contains("]")) |
+                            (s.contains("{") && !s.contains("}"))){
                         min = s.indexOf(element);
-                        break;
+
                     }
                 }
-                break;
-            }
+
+           // }
             j++;
         }
 
         if (min != s.length()) {
-            System.out.println((1 + min));
-            return;
+            return ""+(1+min);
         }
 
 
@@ -59,23 +59,27 @@ public class number2String {
             j++;
         }
         if (min != s.length())
-            System.out.println((1 + min));
-        else System.out.println("Success");
+           return ""+(1 + min);
+        else return "Success";
 
-        //return "END";
+
 
     }
 
 
 
     public static void main(String[] args) {
-        getProverka("[]");
-        getProverka("{}[]");
-        getProverka("{[]}()");
-        getProverka("{");
-        getProverka("{[}");
-        getProverka("foo(bar)");
-        getProverka("foo(bar[i)");
+        System.out.println(getProverka("[]").equals("Success"));
+         System.out.println(getProverka("{}[]").equals("Success"));
+         System.out.println(getProverka("{[]}()").equals("Success"));
+         System.out.println(getProverka("{").equals("1"));
+         System.out.println(getProverka("{[}").equals("3"));
+         System.out.println(getProverka("foo(bar)").equals("Success"));
+         System.out.println(getProverka("foo(bar[i)").equals("10"));
+         System.out.println(getProverka("()[}").equals("4"));
+         System.out.println(getProverka("()").equals("Success"));
+         System.out.println(getProverka("())").equals("3"));
+
 
     }
 }
