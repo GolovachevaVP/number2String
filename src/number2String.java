@@ -12,13 +12,21 @@ public class number2String {
                 openList.add(str[i]);
             }
             if (isClosed(str[i])) {
+                if (openList.size()==0) {
+                    return (Integer.toString(i+1));
+                }
                 String openBracket = openList.get(openList.size()-1);
                if (!getOpenBracket(str[i]).equals(openBracket)) {
                    return (Integer.toString(i+1));
+               } else {
+                   openList.remove(openList.size()-1);
+
                }
 
             }
         }
+
+
         return "Success";
 
     }
