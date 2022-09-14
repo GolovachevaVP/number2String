@@ -56,7 +56,7 @@ public class number2String {
 //        System.out.println(getProverka("foo(bar[i)").equals("10"));
 //        System.out.println(getProverka("()[}").equals("4"));
        System.out.println(getProverka("()").equals("Success"));
-        System.out.println(getProverka("())").equals("3"));
+       System.out.println(getProverka("())").equals("3"));
 //        System.out.println(getProverka("(()").equals("1"));
 //        System.out.println(getProverka("()[{}").equals("3"));
 //        System.out.println(getProverka("(){[}").equals("5"));
@@ -64,7 +64,7 @@ public class number2String {
         System.out.println(getProverka("(())"));
         System.out.println(getProverka("()()"));
         System.out.println(getProverka("()())))"));
-        System.out.println(getProverka("())()"));
+        System.out.println(getProverka("()(()"));
 
     }
 }
