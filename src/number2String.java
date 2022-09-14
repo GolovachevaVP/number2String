@@ -7,13 +7,19 @@ public class number2String {
         System.out.print("Строка " + s + " - ");
         List<String> openList = new ArrayList<>();
         String[] str = s.split("");
-        for (String element : str) {
-            if (isOpen(element)) openList.add(element);
-            if (isClosed(element)) {
-                String closedBracket = openList.get(openList.size());
-                getOpenBracket(element).equals(closedBracket);
+        for (int i = 0; i < str.length; i++) {
+            if (isOpen(str[i])) {
+                openList.add(str[i]);
+            }
+            if (isClosed(str[i])) {
+                String openBracket = openList.get(openList.size()-1);
+               if (!getOpenBracket(str[i]).equals(openBracket)) {
+                   return (Integer.toString(i+1));
+               }
+
             }
         }
+        return "Success";
 
     }
 
@@ -36,22 +42,24 @@ public class number2String {
     public static void main(String[] args) {
 //        System.out.println(getProverka("[]").equals("Success"));
 //        System.out.println(getProverka("{}[]").equals("Success"));
-//        System.out.println(getProverka("{[]}()").equals("Success"));
-//        System.out.println(getProverka("{").equals("1"));
-//        System.out.println(getProverka("{[}").equals("3"));
-//        System.out.println(getProverka("foo(bar)").equals("Success"));
-//        System.out.println(getProverka("foo(bar[i)").equals("10"));
-//        System.out.println(getProverka("()[}").equals("4"));
-        System.out.println(getProverka("()").equals("Success"));
+        System.out.println(getProverka("{[]}()").equals("Success"));
+        System.out.println(getProverka("{").equals("1"));
+       // System.out.println(getProverka("{[}").equals("3"));
+       // System.out.println(getProverka("foo(bar)").equals("Success"));
+       // System.out.println(getProverka("foo(bar[i)").equals("10"));
+       // System.out.println(getProverka("()[}").equals("4"));
+       // System.out.println(getProverka("()").equals("Success"));
         System.out.println(getProverka("())").equals("3"));
-//        System.out.println(getProverka("(()").equals("1"));
-//        System.out.println(getProverka("()[{}").equals("3"));
-        System.out.println(getProverka("(){[}").equals("5"));
+        System.out.println(getProverka("(()").equals("1"));
+        System.out.println(getProverka("()[{}").equals("3"));
+      //  System.out.println(getProverka("(){[}").equals("5"));
+//
+//        System.out.println(getProverka("(())").equals("Success"));
+//        System.out.println(getProverka("()()").equals("Success"));
+            System.out.println(getProverka("()())))").equals("5"));
+            System.out.println(getProverka("()(()").equals("3"));
 
-        System.out.println(getProverka("(())"));
-        System.out.println(getProverka("()()"));
-        System.out.println(getProverka("()())))"));
-        System.out.println(getProverka("()(()"));
+            //System.out.println(getProverka("(({[}").equals("5"));
 
     }
 }
